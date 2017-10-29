@@ -1,0 +1,16 @@
+=============================================================================
+Sum two columns in a dataset then print the index value of the second highest
+=============================================================================
+
+import pandas as pd
+
+df = pd.read_csv('olympics.csv', index_col=0, skiprows=1)
+count=0
+
+series1=pd.Series((df['Total'] + df['Total.1']).sort_values(ascending=False))
+for index, val in series1.iteritems():
+    count=count+1
+    if count==2:
+        print (index)
+
+=============================================================================
