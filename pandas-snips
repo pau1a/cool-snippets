@@ -78,3 +78,22 @@ def answer_four():
     Points=Goldweights+Silverweights+Bronzeweights
     return Points
 ----------------------------------------------------------------
+#Interim assignment
+purchase_1 = pd.Series({'Name': 'Chris',
+                        'Item Purchased': 'Dog Food',
+                        'Cost': 22.50})
+purchase_2 = pd.Series({'Name': 'Kevyn',
+                        'Item Purchased': 'Kitty Litter',
+                        'Cost': 2.50})
+purchase_3 = pd.Series({'Name': 'Vinod',
+                        'Item Purchased': 'Bird Seed',
+                        'Cost': 5.00})
+
+df = pd.DataFrame([purchase_1, purchase_2, purchase_3], index=['Store 1', 'Store 1', 'Store 2'])
+#Verbose Solution
+dfspenders=df.where(df['Cost'] > 3)
+#dfspenders=dfspenders.dropna()
+print(dfspenders['Name'])
+#Terse Solution
+df['Name'][df['Cost']>3]
+---------------------------------------------------------------
