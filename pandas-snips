@@ -113,3 +113,10 @@ df = pd.DataFrame([purchase_1, purchase_2, purchase_3], index=['Store 1', 'Store
 df = df.set_index([df.index, 'Name'])#Set the indexing
 df.index.names = ['Location', 'Name']#Set the labels
 df = df.append(pd.Series(data={'Cost': 3.00, 'Item Purchased': 'Kitty Food'}, name=('Store 2', 'Kevyn')))#Adds an element
+--------------------------------------------------------------
+#Question 5
+def answer_five():
+    census_df = pd.read_csv('census.csv')
+    census_df = census_df.set_index(['STNAME', 'CTYNAME'])
+    census_df = census_df.groupby(level=0).count()
+    return census_df['SUMLEV'].sort_values(ascending=False).idxmax()
