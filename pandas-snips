@@ -143,3 +143,24 @@ for st in state_df.index:
 print(state_df['CountyCnt'].sort_values (ascending=False).idxmax())
 
 ===================================================================
+
+import pandas as pd
+census_df = pd.read_csv('cs.csv')
+
+df_filtered=census_df[census_df['SUMLEV'] == 50]
+state_df = pd.DataFrame()
+state_df['State']=df_filtered['STNAME'].unique()
+
+state_df['Top_Three_C'] = 0
+state_df.set_index('State',inplace=True)
+
+for st in state_df.index:
+    cpop = df_filtered['CENSUS2010POP'][df_filtered['STNAME'] == st]
+    stsum=cpop.nlargest(3).sum()
+    state_df['Top_Three_C'].loc[st] = stsum
+
+state_df=state_df.sort_values(by='Top_Three_C',ascending=False)[:3]
+
+print(state_df.index.values)
+
+===================================================================
